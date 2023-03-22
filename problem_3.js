@@ -1,7 +1,23 @@
+/**
+Given an array of integers A, we call (i, j) an important reverse pair if i < j and A[i] > 2*A[j].
+Return the number of important reverse pairs in the given array A.
+ */
 
+/**
+ * TC: O(nlogn)
+ * SC: 0(n)
+ * @param {number[]} A 
+ * @returns 
+ */
+function reversePairs(A) {
+    const ans = mergeSort(A, 0, A.length - 1)
+    return ans
+}
+
+reversePairs([14046, 57239, 78362, 99387, 27609, 55100, 65536, 62099, 40820, 33056, 88380, 78549, 57512, 33137, 81212, 32365, 42276, 65368, 52459, 74924, 25355, 76044, 78056, 45190, 94365, 58869, 20611])
 
 function mergeSort(Arr, start, end) {
-    if (start == end) return 0
+    if (start >= end) return 0
     let mid = Math.floor((start + end) / 2)
     const count1 = mergeSort(Arr, start, mid)
     const count2 = mergeSort(Arr, mid + 1, end)
@@ -10,7 +26,7 @@ function mergeSort(Arr, start, end) {
     let count = 0
     while (i <= mid && j <= end) {
         if (Arr[i] > 2 * Arr[j]) {
-            count += (end - start + 1) - i
+            count += (mid - i + 1)
             j++
         } else {
             i++
@@ -51,13 +67,4 @@ function merge(Arr, start, mid, end) {
     return Arr
 }
 
-console.log(mergeSort([1, 3, 2, 3, 1], 0, 4))
-
-
-/**
- * 3
- * [2,4,3,9]  [7,8,6]
- * 
- * 2 4 3    1 5
- * 
- */
+// https://leetcode.com/problems/reverse-pairs/
